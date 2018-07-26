@@ -12,8 +12,10 @@ const version = require('../package.json').version
 const icons = path.join(__dirname, '../src/icons')
 const output = path.join(__dirname, '../build')
 
+// delete any previous build files
 del.sync(output)
 
+// interate over svg files in src folder
 glob(`${icons}**/*.svg`, (err, files) => {
     files.forEach(file => {
 
@@ -29,6 +31,7 @@ glob(`${icons}**/*.svg`, (err, files) => {
     fs.outputFile(path.join(output, 'package.json'), getPackageJsonSource(version));
 });
 
+// take the source svg string and transpile into JSX
 const convertSVGString = (svgContent, fileName) => {
     svgr(svgContent, { icon: true, newTitleProp: true, descProp: true, childrenProp: true, template: template }, { componentName: fileName })
         .then(component => {
@@ -37,11 +40,14 @@ const convertSVGString = (svgContent, fileName) => {
         })
 }
 
+
+// take the outputted string from step above, transpile with babel and output the file
 const buildJSFile = (component, fileName) => {
     console.log(`building ${fileName} component`);
     fs.outputFile(path.join(output, `${fileName}.js`), transpileCode(component));
 }
 
+// transpile the raw es6 code into usable es modules
 const transpileCode = (source) => {
     return transform(source, {
         presets: ['es2015', 'env', 'react'],
@@ -49,6 +55,7 @@ const transpileCode = (source) => {
     }).code
 }
 
+// for each component, output a corresponding type file
 const buildTypeFile = (fileName) => {
     const typesTemplate = `
     import * as React from 'react';
@@ -64,6 +71,7 @@ const buildTypeFile = (fileName) => {
     fs.outputFile(path.join(output, `${fileName}.d.ts`), typesTemplate);
 }
 
+// output a package.json file
 const getPackageJsonSource = (version) => `{
     "name": "react-icon-test",
     "version": "${version}",
@@ -71,3 +79,7 @@ const getPackageJsonSource = (version) => `{
       "react": ">=15"
     }
   }`
+
+const buildIconTemplate = () => `
+
+`

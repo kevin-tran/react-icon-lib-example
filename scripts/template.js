@@ -8,6 +8,9 @@ const descProp = require('./transforms/descProp').descProp
 const titleProp = require('./transforms/titleProp').titleProp
 const childrenProp = require('./transforms/childrenProp').childrenProp
 
+
+// svgr specific template for configuring the file string that is outputted
+// applying a couple extra transforms for ternary operators around configuration props (title desc) and children
 exports.template = async (code, config, state) => {
     const props = getProps(config)
 
