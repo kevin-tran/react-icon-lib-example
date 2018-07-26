@@ -50,7 +50,7 @@ const buildJSFile = (component, fileName) => {
 // transpile the raw es6 code into usable es modules
 const transpileCode = (source) => {
     return transform(source, {
-        presets: ['es2015', 'env', 'react'],
+        presets: ['es2015', 'env', 'react', 'minify'],
         plugins: ['transform-object-rest-spread']
     }).code
 }
@@ -71,7 +71,7 @@ const buildTypeFile = (fileName) => {
     fs.outputFile(path.join(output, `${fileName}.d.ts`), typesTemplate);
 }
 
-// output a package.json file
+// output a package.json file                                            
 const getPackageJsonSource = (version) => `{
     "name": "react-icon-test",
     "version": "${version}",
