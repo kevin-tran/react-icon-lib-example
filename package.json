@@ -1,6 +1,6 @@
 {
   "name": "react-icon-lib-example",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Example project for converting raw SVG's into a React component npm package",
   "repository": "https://github.com/kevin-tran/react-icon-lib-example.git",
   "author": "kevin <kevintranvs@outlook.com>",
@@ -24,12 +24,5 @@
     "path": "^0.12.7",
     "react": "^16.4.1",
     "react-dom": "^16.4.1"
-  },
-  "peerDependencies": {
-    "react": ">=15.x",
-    "react-dom": ">=15.x"
-  },
-  "dependencies": {
-    "formik": "^1.0.2"
   }
 }

@@ -1,5 +1,7 @@
-const JSXElement = require('h2x-plugin-jsx').JSXElement;
-const JSXText = require('h2x-plugin-jsx').JSXText;
+'use strict'
+
+const JSXElement = require('h2x-plugin-jsx').JSXElement
+const JSXText = require('h2x-plugin-jsx').JSXText
 
 const hasDesc = node =>
   node.children.reduce((accumulation, value) => {

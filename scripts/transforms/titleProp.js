@@ -1,4 +1,6 @@
-const JSXText = require('h2x-plugin-jsx').JSXText;
+'use strict'
+
+const JSXText = require('h2x-plugin-jsx').JSXText
 
 const hasTitle = node =>
   node.children.reduce((accumulation, value) => {

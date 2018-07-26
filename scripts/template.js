@@ -1,24 +1,22 @@
 
-const Transform = require('h2x-core').transform;
-const JSX = require('h2x-plugin-jsx').default;
+'use strict';
 
-const descProp = require('./transforms/descProp').descProp;
-const titleProp = require('./transforms/titleProp').titleProp;
-const childrenProp = require('./transforms/childrenProp').childrenProp;
+const Transform = require('h2x-core').transform
+const JSX = require('h2x-plugin-jsx').default
+
+const descProp = require('./transforms/descProp').descProp
+const titleProp = require('./transforms/titleProp').titleProp
+const childrenProp = require('./transforms/childrenProp').childrenProp
 
 exports.template = async (code, config, state) => {
-    const props = getProps(config);
+    const props = getProps(config)
 
-    const transformedCode = await transform(code, config, state);
-    // not sure why when you run this through the JSX transform again it adds empty attributes in the svg, hack for now
-    let formatCode = transformedCode.replace('{...props}=""', '{...props}');
-    console.log(formatCode);
+    const transformedCode = await applyTransforms(code, config, state)
+    const formatCode = transformedCode.replace('{...props}=""', '{...props}')
 
-    let result = `import React from 'react'\n\n
+    const result = `import React from 'react'\n\n
     const ${state.componentName} = ${props} => ${formatCode}\n\n
     export default ${state.componentName}`
-
-    console.log(result);
 
     return result
 }
@@ -43,6 +41,6 @@ const plugins = [
     childrenProp()
 ]
 
-function transform(code) {
+const applyTransforms = code => {
     return Transform(code, { plugins })
 }
