@@ -24,6 +24,7 @@ exports.template = async (code, config, state) => {
     return result
 }
 
+// creates the props for the outputted component
 const getProps = config => {
     const props = []
     if (config.ref) props.push('svgRef')
@@ -37,6 +38,8 @@ const getProps = config => {
     return `({ ${props.join(', ')} })`
 }
 
+
+// ast transpile configuration for the transforms as described
 const plugins = [
     JSX,
     descProp(),

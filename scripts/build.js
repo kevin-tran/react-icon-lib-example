@@ -48,7 +48,7 @@ const buildJSFile = (component, fileName) => {
 }
 
 // transpile the raw es6 code into usable es modules
-const transpileCode = (source) => {
+const transpileCode = source => {
     return transform(source, {
         presets: ['es2015', 'env', 'react', 'minify'],
         plugins: ['transform-object-rest-spread']
@@ -56,7 +56,7 @@ const transpileCode = (source) => {
 }
 
 // for each component, output a corresponding type file
-const buildTypeFile = (fileName) => {
+const buildTypeFile = fileName => {
     const typesTemplate = `
     import * as React from 'react';
     export interface IProps extends React.SVGProps<SVGElement> {
@@ -72,7 +72,7 @@ const buildTypeFile = (fileName) => {
 }
 
 // output a package.json file                                            
-const getPackageJsonSource = (version) => `{
+const getPackageJsonSource = version => `{
     "name": "react-icon-test",
     "version": "${version}",
     "peerDependencies": {
