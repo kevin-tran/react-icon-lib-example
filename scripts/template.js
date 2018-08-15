@@ -3,7 +3,7 @@
 
 const htmlParser = require('html-parse-stringify2')
 
-exports.template = async (code, config, state) => {
+exports.default = async (code, config, state) => {
     const props = getProps(config)
     
     const svgTag = code.substring(0, code.indexOf('{...props}>') + 11);

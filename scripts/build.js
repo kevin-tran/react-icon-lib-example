@@ -4,7 +4,7 @@ const glob = require('glob')
 const path = require('path')
 const fs = require('fs-extra')
 const svgr = require('@svgr/core').default
-const template = require('./template').template
+const template = require('./template').default
 const transform = require('babel-core').transform
 
 const icons = path.join(__dirname, '../src/icons')
@@ -36,10 +36,10 @@ const convertSVGString = (svgContent, fileName) => {
 // take the outputted string from step above, transpile with babel and output the file
 const buildJSFile = (component, fileName) => {
     console.log(`building ${fileName} component`);
-    fs.outputFile(path.join(output, `${fileName}.js`), component)
+    fs.outputFile(path.join(output, `${fileName}.js`), transpileCode(component))
 }
 
-// transpile the raw es6 code into usable es modules
+// transpile es6 syntax
 const transpileCode = source => {
     return transform(source, {
         presets: ['es2015', 'env', 'react'],
