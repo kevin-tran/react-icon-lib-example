@@ -23,7 +23,10 @@ Icon.propTypes = {
     title: PropTypes.string,
     desc: PropTypes.string,
     children: PropTypes.node.isRequired,
-    preserveAspectRatio: PropTypes.string
+    preserveAspectRatio: PropTypes.string,
+    fill: PropTypes.string,
+    stroke: PropTypes.string,
+    className: PropTypes.string
 }
 
 Icon.defaultProps = {
