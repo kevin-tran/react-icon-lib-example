@@ -3,17 +3,17 @@ import { storiesOf } from '@storybook/react';
 
 const stories = storiesOf('react-icon-lib-example', module);
 
-import Alerts from '../dist/alerts'
-import Camera from '../dist/camera'
-import Circle from '../dist/circle'
+import Accelerator from '../dist/accelerator'
+import Alarm from '../dist/alarm'
+import Anchor from '../dist/anchor'
 
 stories
     .add('Alerts Icon', () => (
-        <Alerts />
+        <Accelerator />
     ))
     .add('Camera Icon', () => (
-        <Camera />
+        <Alarm />
     ))
     .add('Circle Icon', () => (
-        <Circle />
+        <Anchor />
     ))
