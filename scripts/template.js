@@ -1,11 +1,23 @@
 
 'use strict';
 
+const htmlParser = require('html-parse-stringify2')
+
 exports.template = async (code, config, state) => {
     const props = getProps(config)
+    
+    const svgTag = code.substring(0, code.indexOf('{...props}>') + 11);
+    const svgToHtml = htmlParser.parse(code)
+    const viewBox = svgToHtml[0].attrs.viewBox
+    const formattedCode = stripeSvgTags(code, svgTag.length)
 
     const result = `import React from 'react'\n\n
-    const ${state.componentName} = ${props} => ${code}\n\n
+    import { Icon } from './icon'\n\n
+    const ${state.componentName} = ${props} => 
+    <Icon viewBox='${viewBox}' {...props}>
+    {children}
+    ${formattedCode}
+    </Icon>
     export default ${state.componentName}`
 
     return result
@@ -24,3 +36,5 @@ const getProps = config => {
 
     return `({ ${props.join(', ')} })`
 }
+
+const stripeSvgTags = (source, initialSlice) => source.slice(initialSlice, -7)

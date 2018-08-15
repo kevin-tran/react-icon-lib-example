@@ -21,25 +21,22 @@ glob(`${icons}**/*.svg`, (err, files) => {
         fs.readFile(file, 'utf8', (err, svgContent) => {
             if (err) return console.log(err);
 
-            convertSVGString(svgContent, fileName);
+            convertSVGString(svgContent, fileName)
         });
     });
 });
 
 // take the source svg string and transpile into JSX
 const convertSVGString = (svgContent, fileName) => {
-    svgr(svgContent, { icon: true, template: template }, { componentName: fileName })
-        .then(component => {
-            buildJSFile(component, fileName);
-            buildTypeFile(fileName);
-        })
+    svgr(svgContent, { icon: true, childrenProp: true, template: template }, { componentName: fileName })
+        .then(component => buildJSFile(component, fileName))
 }
 
 
 // take the outputted string from step above, transpile with babel and output the file
 const buildJSFile = (component, fileName) => {
     console.log(`building ${fileName} component`);
-    fs.outputFile(path.join(output, `${fileName}.js`), component);
+    fs.outputFile(path.join(output, `${fileName}.js`), component)
 }
 
 // transpile the raw es6 code into usable es modules
@@ -48,20 +45,4 @@ const transpileCode = source => {
         presets: ['es2015', 'env', 'react'],
         plugins: ['transform-object-rest-spread']
     }).code
-}
-
-// for each component, output a corresponding type file
-const buildTypeFile = fileName => {
-    const typesTemplate = `
-    import * as React from 'react';
-    export interface IProps extends React.SVGProps<SVGElement> {
-        title: string;
-        desc: string;
-        children?: React.ReactNode;
-    }
-
-    export default class ${fileName} extends React.Component<IProps> { }
-    `;
-
-    fs.outputFile(path.join(output, `${fileName}.d.ts`), typesTemplate);
 }

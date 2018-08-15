@@ -4,18 +4,19 @@
   "description": "Example project for converting raw SVG's into a React component npm package",
   "repository": "https://github.com/kevin-tran/react-icon-lib-example.git",
   "author": "kevin <kevintranvs@outlook.com>",
-  "main": "dist/index.js",
-  "module": "dist/index.es.js",
-  "umd:main": "dist/index.umd.js",
-  "source": "src/index.js",
+  "main": "dist/icon.js",
+  "module": "dist/icon.es.js",
   "files": [
     "dist"
   ],
   "license": "MIT",
   "scripts": {
-    "build": "rimraf dist && yarn microbundle --external all && node ./scripts/build.js"
+    "build-icons": "rimraf dist && node ./scripts/build.js && yarn build",
+    "build": "rollup -c",
+    "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "devDependencies": {
+    "@storybook/react": "^3.4.10",
     "@svgr/core": "^2.1.1",
     "babel-core": "^6.26.3",
     "babel-minify": "^0.4.3",
@@ -26,16 +27,19 @@
     "babel-preset-react": "^6.24.1",
     "fs-extra": "^7.0.0",
     "glob": "^7.1.2",
-    "microbundle": "^0.6.0",
+    "html-parse-stringify": "^1.0.2",
+    "html-parse-stringify2": "^2.0.1",
     "path": "^0.12.7",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.6.2",
+    "rollup": "^0.64.1",
+    "rollup-plugin-babel": "^3.0.7",
+    "storybook-readme": "^3.3.0"
   },
   "peerDependencies": {
-    "react": ">=15"
-  },
-  "dependencies": {
-    "prop-types": "^15.6.2"
+    "prop-types": ">=15",
+    "react": ">=15",
+    "react-dom": ">=15"
   }
 }

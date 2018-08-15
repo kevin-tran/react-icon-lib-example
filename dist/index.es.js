@@ -1,2 +1,0 @@
-import"react";import e from"prop-types";var r=function(e,r,i,t,s,l){for(var n=[],o=arguments.length-6;o-- >0;)n[o]=arguments[o+6];return h("svg",Object.assign({},{"aria-hidden":t?"false":"true"},props),t?h("title",{id:props["aria-labelledby"]},t):null,s?h("desc",{id:props["aria-describedby"]},s):null,l)};r.propTypes={width:e.number,height:e.number,viewBox:e.string,title:e.string,desc:e.string,children:e.node.isRequired},r.defaultProps={fill:"currentColor",height:"1em",width:"1em"};export{r as Icon};
-//# sourceMappingURL=index.es.js.map
