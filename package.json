@@ -13,7 +13,8 @@
   "scripts": {
     "build-icons": "rimraf dist && node ./scripts/build.js && yarn build",
     "build": "rollup -c",
-    "storybook": "start-storybook -p 9001 -c .storybook"
+    "storybook": "start-storybook -p 9001 -c .storybook",
+    "deploy-storybook": "build-storybook -c .storybook -o docs"
   },
   "devDependencies": {
     "@storybook/react": "^3.4.10",
